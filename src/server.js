@@ -28,7 +28,7 @@ app.use('/reports', reportsRoutes);
 app.use('/categories', categoriesRoutes);
 app.use("/import/products", productImportRoutes);
 app.use('/promos', promoRoutes);
-app.use('/promos', promoSeedRoutes);
+//app.use('/promos', promoSeedRoutes);
 app.use("/promos/manage", promoManageRoutes);
 
 const PORT = process.env.PORT || 4000;
