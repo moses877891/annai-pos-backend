@@ -19,7 +19,7 @@ function cleanNumber(v) {
 }
 
 // POST /import/products
-router.post("/", auth("admin"), upload.single("file"), async (req, res) => {
+router.post("/", auth('admin'), upload.single("file"), async (req, res) => {
   if (!req.file) return res.status(400).json({ message: "No file uploaded" });
 
   const filePath = req.file.path;
