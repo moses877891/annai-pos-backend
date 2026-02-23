@@ -6,7 +6,7 @@ const router = Router();
 
 
 // CREATE
-router.post("/", auth('manager'), async (req, res) => {
+router.post("/", auth(), async (req, res) => {
   try {
     const payload = normalizePromoBody(req.body);
     const promo = await Promotion.create(payload);
@@ -17,13 +17,13 @@ router.post("/", auth('manager'), async (req, res) => {
 });
 
 // LIST PROMOS
-router.get("/", auth('manager'), async (req, res) => {
+router.get("/", auth(), async (req, res) => {
   const promos = await Promotion.find().sort({ createdAt: -1 });
   return res.json(promos);
 });
 
 // GET SINGLE PROMO
-router.get("/:id", auth('manager'), async (req, res) => {
+router.get("/:id", auth(), async (req, res) => {
   const promo = await Promotion.findById(req.params.id);
   if (!promo) return res.status(404).json({ message: "Not found" });
   return res.json(promo);
@@ -31,7 +31,7 @@ router.get("/:id", auth('manager'), async (req, res) => {
 
 
 // UPDATE
-router.put("/:id", auth('manager'), async (req, res) => {
+router.put("/:id", auth(), async (req, res) => {
   try {
     const payload = normalizePromoBody(req.body);
     const updated = await Promotion.findByIdAndUpdate(req.params.id, payload, { new: true });
@@ -44,7 +44,7 @@ router.put("/:id", auth('manager'), async (req, res) => {
 
 
 // DELETE PROMO
-router.delete("/:id", auth('manager'), async (req, res) => {
+router.delete("/:id", auth(), async (req, res) => {
   await Promotion.findByIdAndDelete(req.params.id);
   return res.json({ ok: true });
 });
